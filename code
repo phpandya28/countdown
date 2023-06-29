@@ -39,10 +39,10 @@ def start_timer(duration):
 
         if remaining_time <= 15 and remaining_time > 14:
             print("Playing audio clip at 15 seconds")
-            play_audio_clip("audio_clip_1.mp3")
+            play_audio_clip("15 sec.mp3")
         elif remaining_time <= 5 and remaining_time > 4:
             print("Playing audio clip at 5 seconds")
-            play_audio_clip("audio_clip_2.mp3")
+            play_audio_clip("5 sec.mp3")
 
         draw_countdown(int(remaining_time))
 
