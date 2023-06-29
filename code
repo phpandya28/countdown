@@ -1,0 +1,60 @@
+import time
+import pygame
+
+# Colors
+GREEN = (0, 255, 0)
+BLACK = (0, 0, 0)
+
+# Initialize pygame
+pygame.init()
+
+# Set up the window
+window_width, window_height = 640, 480
+window = pygame.display.set_mode((window_width, window_height))
+pygame.display.set_caption("Countdown Timer")
+
+# Load the font
+font = pygame.font.SysFont(None, 100)
+
+def play_audio_clip(file_path):
+    pygame.mixer.init()
+    pygame.mixer.music.load(file_path)
+    pygame.mixer.music.play()
+
+def draw_countdown(count):
+    window.fill(GREEN)
+    text = font.render(str(count), True, BLACK)
+    text_rect = text.get_rect(center=(window_width/2, window_height/2))
+    window.blit(text, text_rect)
+    pygame.display.flip()
+
+def start_timer(duration):
+    start_time = time.time()
+    while True:
+        elapsed_time = time.time() - start_time
+        remaining_time = duration - elapsed_time
+
+        if remaining_time <= 0:
+            break
+
+        if remaining_time <= 15 and remaining_time > 14:
+            print("Playing audio clip at 15 seconds")
+            play_audio_clip("audio_clip_1.mp3")
+        elif remaining_time <= 5 and remaining_time > 4:
+            print("Playing audio clip at 5 seconds")
+            play_audio_clip("audio_clip_2.mp3")
+
+        draw_countdown(int(remaining_time))
+
+        time.sleep(0.1)  # Adjust the sleep time as needed
+
+    print("Timer finished!")
+
+# Set the duration of the timer in seconds
+timer_duration = 30
+
+# Start the timer
+start_timer(timer_duration)
+
+# Quit pygame
+pygame.quit()
